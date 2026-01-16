@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             linkToRegister = new LinkLabel();
             linkToRegistration = new LinkLabel();
             label3 = new Label();
@@ -37,8 +36,7 @@
             btnLogin = new Button();
             tbPassword = new TextBox();
             tbUsername = new TextBox();
-            pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            label4 = new Label();
             SuspendLayout();
             // 
             // linkToRegister
@@ -122,23 +120,22 @@
             tbUsername.Size = new Size(214, 23);
             tbUsername.TabIndex = 7;
             // 
-            // pictureBox1
+            // label4
             // 
-            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(308, 90);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(370, 106);
-            pictureBox1.TabIndex = 14;
-            pictureBox1.TabStop = false;
+            label4.AutoSize = true;
+            label4.Font = new Font("Arial Rounded MT Bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(356, 150);
+            label4.Name = "label4";
+            label4.Size = new Size(292, 40);
+            label4.TabIndex = 14;
+            label4.Text = "Fitness Tracker ";
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(984, 561);
-            Controls.Add(pictureBox1);
+            Controls.Add(label4);
             Controls.Add(linkToRegistration);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -150,7 +147,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Fitness Tracker";
             Load += Main_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -164,6 +160,6 @@
         private Button btnLogin;
         private TextBox tbPassword;
         private TextBox tbUsername;
-        private PictureBox pictureBox1;
+        private Label label4;
     }
 }

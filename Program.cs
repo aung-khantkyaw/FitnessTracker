@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+
 namespace Fitness_Tracker
 {
     internal static class Program
@@ -8,6 +11,10 @@ namespace Fitness_Tracker
         [STAThread]
         static void Main()
         {
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string projectRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", ".."));
+            AppDomain.CurrentDomain.SetData("DataDirectory", projectRoot);
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();

@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using Fitness_Tracker.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -11,7 +12,7 @@ namespace Fitness_Tracker.DataAccess
 
         public GoalModel()
         {
-            _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\DELL\\Documents\\FitnessTracker.mdf;Integrated Security=True;Connect Timeout=30";
+            _connectionString = ConnectionStringProvider.ConnectionString;
         }
 
         public bool AddGoal(Goals Goal)
@@ -283,6 +284,63 @@ namespace Fitness_Tracker.DataAccess
                 catch (Exception ex)
                 {
                     MessageBox.Show("An unexpected error occurred while retrieving Goals for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }
+        }
+
+        public DataTable GetGoalsByFilters(string username, string? status, int? minGoal, int? maxGoal)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                List<string> conditions = new List<string> { "Username = @Username" };
+                if (!string.IsNullOrWhiteSpace(status))
+                {
+                    conditions.Add("IsAchieved = @Status");
+                }
+                if (minGoal.HasValue)
+                {
+                    conditions.Add("Goal >= @MinGoal");
+                }
+                if (maxGoal.HasValue)
+                {
+                    conditions.Add("Goal <= @MaxGoal");
+                }
+
+                string whereClause = string.Join(" AND ", conditions);
+                string query = $"SELECT * FROM Goals WHERE {whereClause}";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", username);
+                if (!string.IsNullOrWhiteSpace(status))
+                {
+                    command.Parameters.AddWithValue("@Status", status);
+                }
+                if (minGoal.HasValue)
+                {
+                    command.Parameters.AddWithValue("@MinGoal", minGoal.Value);
+                }
+                if (maxGoal.HasValue)
+                {
+                    command.Parameters.AddWithValue("@MaxGoal", maxGoal.Value);
+                }
+
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(dataTable);
+                    return dataTable;
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Database Error retrieving Goals for filters: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An unexpected error occurred while retrieving Goals for filters: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
             }

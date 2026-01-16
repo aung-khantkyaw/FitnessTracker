@@ -9,7 +9,7 @@ namespace Fitness_Tracker.DataAccess
 
         public UserModel()
         {
-            _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\DELL\\Documents\\FitnessTracker.mdf;Integrated Security=True;Connect Timeout=30";
+            _connectionString = ConnectionStringProvider.ConnectionString;
         }
 
         public User GetUserByUsername(string username)

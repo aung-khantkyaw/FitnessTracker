@@ -1,6 +1,9 @@
 ﻿using Fitness_Tracker.Controller;
 using Fitness_Tracker.Models;
 using Fitness_Tracker.Utils;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Fitness_Tracker
 {
@@ -11,6 +14,7 @@ namespace Fitness_Tracker
         private Main _loginForm;
         private Profile _profileForm;
         private ActivityForm _activityForm;
+        private readonly List<string> _statusFilters = new List<string> { "All", "Inprogress", "Complete", "Fail" };
 
         public GoalForm()
         {
@@ -18,7 +22,47 @@ namespace Fitness_Tracker
             _loginForm = new Main();
             _userController = new UserController(_loginForm);
             _goalController = new GoalController(this);
+            BuildStatusFilterButtons();
             _goalController.DisplayGoalsByUsername(dataGridViewGoal, SessionManager.Username);
+        }
+
+        private void BuildStatusFilterButtons()
+        {
+            flowLayoutPanelStatusFilters.Controls.Clear();
+
+            foreach (string status in _statusFilters)
+            {
+                flowLayoutPanelStatusFilters.Controls.Add(CreateStatusButton(status));
+            }
+        }
+
+        private Button CreateStatusButton(string status)
+        {
+            Button button = new Button
+            {
+                Text = status,
+                Tag = status,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Margin = new Padding(5),
+                Padding = new Padding(8, 6, 8, 6)
+            };
+
+            button.Click += StatusFilter_Click;
+            return button;
+        }
+
+        private void StatusFilter_Click(object? sender, EventArgs e)
+        {
+            if (sender is not Button button)
+            {
+                return;
+            }
+
+            string status = button.Tag?.ToString() ?? "All";
+            string? filterStatus = string.Equals(status, "All", StringComparison.OrdinalIgnoreCase) ? null : status;
+
+            _goalController.DisplayGoalsByFilters(dataGridViewGoal, SessionManager.Username, filterStatus, null, null);
         }
 
         private void btnProfile_Click(object sender, EventArgs e)
@@ -148,7 +192,12 @@ namespace Fitness_Tracker
 
         private void dataGridViewGoal_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

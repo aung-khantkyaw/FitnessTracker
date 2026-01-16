@@ -13,7 +13,7 @@ namespace Fitness_Tracker.Controller
 
         public GoalController(GoalForm goalForm)
         {
-            _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\DELL\\Documents\\FitnessTracker.mdf;Integrated Security=True;Connect Timeout=30";
+            _connectionString = ConnectionStringProvider.ConnectionString;
             _goalForm = goalForm;
             _goalModel = new GoalModel();
         }
@@ -48,6 +48,26 @@ namespace Fitness_Tracker.Controller
             try
             {
                 DataTable goals = _goalModel.GetGoalsByUsername(username);
+                if (goals != null)
+                {
+                    dataGridView.DataSource = goals;
+                }
+                else
+                {
+                    _goalForm.ShowErrorMessage("No goals found to display.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _goalForm.ShowErrorMessage("Error retrieving goals: " + ex.Message);
+            }
+        }
+
+        public void DisplayGoalsByFilters(DataGridView dataGridView, string username, string? status, int? minGoal, int? maxGoal)
+        {
+            try
+            {
+                DataTable goals = _goalModel.GetGoalsByFilters(username, status, minGoal, maxGoal);
                 if (goals != null)
                 {
                     dataGridView.DataSource = goals;

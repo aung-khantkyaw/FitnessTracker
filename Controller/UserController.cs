@@ -16,14 +16,14 @@ namespace Fitness_Tracker.Controller
 
         public UserController(Main loginForm)
         {
-            _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\DELL\\Documents\\FitnessTracker.mdf;Integrated Security=True;Connect Timeout=30";
+            _connectionString = ConnectionStringProvider.ConnectionString;
             _loginForm = loginForm;
             _userModel = new UserModel();
             _goalModel = new GoalModel();
         }
         public UserController(Register registrationForm, Main loginForm)
         {
-            _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\DELL\\Documents\\FitnessTracker.mdf;Integrated Security=True;Connect Timeout=30";
+            _connectionString = ConnectionStringProvider.ConnectionString;
             _registrationForm = registrationForm;
             _loginForm = loginForm;
             _userModel = new UserModel();
@@ -31,7 +31,7 @@ namespace Fitness_Tracker.Controller
 
         public UserController(Profile profileForm, Main loginForm)
         {
-            _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\DELL\\Documents\\FitnessTracker.mdf;Integrated Security=True;Connect Timeout=30";
+            _connectionString = ConnectionStringProvider.ConnectionString;
             _profileForm = profileForm;
             _loginForm = loginForm;
             _userModel = new UserModel();

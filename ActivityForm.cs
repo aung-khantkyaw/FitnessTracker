@@ -1,6 +1,7 @@
 ﻿using Fitness_Tracker.Controller;
 using Fitness_Tracker.Models;
 using Fitness_Tracker.Utils;
+using System.Windows.Forms;
 
 namespace Fitness_Tracker
 {
@@ -12,6 +13,7 @@ namespace Fitness_Tracker
         private Main _loginForm;
         private Profile _profileForm;
         private GoalForm _goalForm;
+        private List<ActivityType> _activityTypes;
 
         public ActivityForm()
         {
@@ -20,24 +22,80 @@ namespace Fitness_Tracker
             _userController = new UserController(_loginForm);
             _activityController = new ActivityController(this);
             _activityController.DisplayActivitiesByUsername(dataGridViewActivity, SessionManager.Username);
+            _activityTypes = _activityController.GetActivityTypeList();
             InsertDataToComboBox();
+            BuildFilterButtons();
         }
 
         public void InsertDataToComboBox()
         {
-            List<ActivityType> activityTypes = _activityController.GetActivityTypeList(); 
-
-            if (activityTypes != null && activityTypes.Any()) 
+            if (_activityTypes != null && _activityTypes.Any())
             {
-                cbType.DataSource = activityTypes;
-                cbType.DisplayMember = "activity"; 
-                cbType.ValueMember = "Id";       
+                cbType.DataSource = _activityTypes;
+                cbType.DisplayMember = "activity";
+                cbType.ValueMember = "Id";
             }
             else
             {
-                cbType.Items.Clear(); 
-                cbType.Items.Add("No activities available"); 
-                cbType.Enabled = false;                   
+                cbType.Items.Clear();
+                cbType.Items.Add("No activities available");
+                cbType.Enabled = false;
+            }
+        }
+
+        private void BuildFilterButtons()
+        {
+            flowLayoutPanelFilters.Controls.Clear();
+
+            Button allButton = CreateFilterButton("All", null);
+            flowLayoutPanelFilters.Controls.Add(allButton);
+
+            if (_activityTypes == null || !_activityTypes.Any())
+            {
+                Button disabledButton = CreateFilterButton("No activities", null);
+                disabledButton.Enabled = false;
+                flowLayoutPanelFilters.Controls.Add(disabledButton);
+                return;
+            }
+
+            foreach (ActivityType activityType in _activityTypes)
+            {
+                flowLayoutPanelFilters.Controls.Add(CreateFilterButton(activityType.activity, activityType.activity));
+            }
+        }
+
+        private Button CreateFilterButton(string label, string? activityName)
+        {
+            Button button = new Button
+            {
+                Text = label,
+                Tag = activityName,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Margin = new Padding(5),
+                Padding = new Padding(8, 6, 8, 6)
+            };
+
+            button.Click += FilterButton_Click;
+            return button;
+        }
+
+        private void FilterButton_Click(object? sender, EventArgs e)
+        {
+            if (sender is not Button button)
+            {
+                return;
+            }
+
+            string? activityName = button.Tag as string;
+
+            if (string.IsNullOrEmpty(activityName))
+            {
+                _activityController.DisplayActivitiesByUsername(dataGridViewActivity, SessionManager.Username);
+            }
+            else
+            {
+                _activityController.DisplayActivitiesByUsernameAndActivity(dataGridViewActivity, SessionManager.Username, activityName);
             }
         }
 
@@ -127,6 +185,11 @@ namespace Fitness_Tracker
         }
 
         private void dataGridViewActivity_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

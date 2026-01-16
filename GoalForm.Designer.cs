@@ -5,6 +5,9 @@
         /// <summary>
         /// Required designer variable.
         /// </summary>
+            // 
+            // lblFilter
+            // 
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -12,23 +15,31 @@
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
+            // 
+            // lblStatusFilter
+            // 
         {
             if (disposing && (components != null))
             {
                 components.Dispose();
             }
             base.Dispose(disposing);
+            // 
+            // cbStatusFilter
+            // 
         }
 
         #region Windows Form Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
+        // 
+        // lblGoalRange
+        // 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            monthCalendar1 = new MonthCalendar();
             panel2 = new Panel();
             tbId = new TextBox();
             btnDelete = new Button();
@@ -46,19 +57,15 @@
             panel1 = new Panel();
             btnLogout = new Button();
             btnProfile = new Button();
-            label1 = new Label();
             btnActivity = new Button();
             btnGoal = new Button();
+            lblStatusHeading = new Label();
+            flowLayoutPanelStatusFilters = new FlowLayoutPanel();
+            label1 = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewGoal).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // monthCalendar1
-            // 
-            monthCalendar1.Location = new Point(11, 252);
-            monthCalendar1.Name = "monthCalendar1";
-            monthCalendar1.TabIndex = 10;
             // 
             // panel2
             // 
@@ -208,9 +215,9 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(label1);
             panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(btnProfile);
-            panel1.Controls.Add(label1);
             panel1.Controls.Add(btnActivity);
             panel1.Controls.Add(btnGoal);
             panel1.Location = new Point(11, 12);
@@ -242,16 +249,6 @@
             btnProfile.UseVisualStyleBackColor = true;
             btnProfile.Click += btnProfile_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Arial Rounded MT Bold", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(35, 16);
-            label1.Name = "label1";
-            label1.Size = new Size(154, 37);
-            label1.TabIndex = 3;
-            label1.Text = "Fit Track";
-            // 
             // btnActivity
             // 
             btnActivity.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -274,12 +271,42 @@
             btnGoal.UseVisualStyleBackColor = true;
             btnGoal.Click += btnGoal_Click;
             // 
+            // lblStatusHeading
+            // 
+            lblStatusHeading.AutoSize = true;
+            lblStatusHeading.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblStatusHeading.Location = new Point(11, 252);
+            lblStatusHeading.Name = "lblStatusHeading";
+            lblStatusHeading.Size = new Size(101, 17);
+            lblStatusHeading.TabIndex = 10;
+            lblStatusHeading.Text = "Filter by Status";
+            // 
+            // flowLayoutPanelStatusFilters
+            // 
+            flowLayoutPanelStatusFilters.AutoScroll = true;
+            flowLayoutPanelStatusFilters.BorderStyle = BorderStyle.FixedSingle;
+            flowLayoutPanelStatusFilters.Location = new Point(11, 272);
+            flowLayoutPanelStatusFilters.Name = "flowLayoutPanelStatusFilters";
+            flowLayoutPanelStatusFilters.Size = new Size(227, 277);
+            flowLayoutPanelStatusFilters.TabIndex = 11;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Arial Rounded MT Bold", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(3, 16);
+            label1.Name = "label1";
+            label1.Size = new Size(227, 32);
+            label1.TabIndex = 5;
+            label1.Text = "Fitness Tracker ";
+            // 
             // GoalForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(984, 561);
-            Controls.Add(monthCalendar1);
+            Controls.Add(flowLayoutPanelStatusFilters);
+            Controls.Add(lblStatusHeading);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "GoalForm";
@@ -291,15 +318,14 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-        private MonthCalendar monthCalendar1;
         private Panel panel2;
         private Panel panel1;
         private Button btnLogout;
         private Button btnProfile;
-        private Label label1;
         private Button btnActivity;
         private Button btnGoal;
         private DateTimePicker dtpEnd;
@@ -315,5 +341,8 @@
         private Button btnCreate;
         private DataGridView dataGridViewGoal;
         private TextBox tbId;
+        private Label lblStatusHeading;
+        private FlowLayoutPanel flowLayoutPanelStatusFilters;
+        private Label label1;
     }
 }

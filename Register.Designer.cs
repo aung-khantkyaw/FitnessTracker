@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Register));
             label1 = new Label();
             label2 = new Label();
             linkToLogin = new LinkLabel();
@@ -42,13 +41,12 @@
             label4 = new Label();
             label5 = new Label();
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
             label9 = new Label();
+            label10 = new Label();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -167,7 +165,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
-            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(label10);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label4);
@@ -177,16 +175,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(474, 562);
             panel1.TabIndex = 12;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(45, 118);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(364, 110);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
             // 
             // label6
             // 
@@ -232,11 +220,20 @@
             label9.TabIndex = 16;
             label9.Text = "Confirm Password";
             // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Arial Rounded MT Bold", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(70, 163);
+            label10.Name = "label10";
+            label10.Size = new Size(292, 40);
+            label10.TabIndex = 15;
+            label10.Text = "Fitness Tracker ";
+            // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(984, 561);
             Controls.Add(label9);
             Controls.Add(label8);
@@ -255,7 +252,6 @@
             Text = "Register";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -275,10 +271,10 @@
         private Label label4;
         private Label label5;
         private Panel panel1;
-        private PictureBox pictureBox1;
         private Label label6;
         private Label label7;
         private Label label8;
         private Label label9;
+        private Label label10;
     }
 }

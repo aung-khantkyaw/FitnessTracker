@@ -10,7 +10,7 @@ namespace Fitness_Tracker.DataAccess
 
         public ActivityModel()
         {
-            _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\DELL\\Documents\\FitnessTracker.mdf;Integrated Security=True;Connect Timeout=30";
+            _connectionString = ConnectionStringProvider.ConnectionString;
         }
 
         public List<ActivityType> GetActivityTypeList()
@@ -130,6 +130,35 @@ namespace Fitness_Tracker.DataAccess
                 string query = "SELECT * FROM Activities WHERE Username = @Username";
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Username", Username);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(dataTable);
+                    return dataTable;
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Database Error retrieving Activities for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An unexpected error occurred while retrieving Goals for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }
+        }
+
+        public DataTable GetActivitiesByUsernameAndType(string username, string activityName)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM Activities WHERE Username = @Username AND activity_name = @ActivityName";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", username);
+                command.Parameters.AddWithValue("@ActivityName", activityName);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataTable dataTable = new DataTable();
                 try

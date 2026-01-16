@@ -47,7 +47,8 @@
             label2 = new Label();
             cbType = new ComboBox();
             panel1 = new Panel();
-            monthCalendar1 = new MonthCalendar();
+            lblFilter = new Label();
+            flowLayoutPanelFilters = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)dataGridViewActivity).BeginInit();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
@@ -67,12 +68,13 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Arial Rounded MT Bold", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(35, 16);
+            label1.Font = new Font("Arial Rounded MT Bold", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(3, 16);
             label1.Name = "label1";
-            label1.Size = new Size(154, 37);
+            label1.Size = new Size(227, 32);
             label1.TabIndex = 3;
-            label1.Text = "Fit Track";
+            label1.Text = "Fitness Tracker ";
+            label1.Click += label1_Click;
             // 
             // btnGoal
             // 
@@ -251,20 +253,34 @@
             panel1.Size = new Size(227, 228);
             panel1.TabIndex = 11;
             // 
-            // monthCalendar1
+            // lblFilter
             // 
-            monthCalendar1.Location = new Point(11, 252);
-            monthCalendar1.Name = "monthCalendar1";
-            monthCalendar1.TabIndex = 13;
+            lblFilter.AutoSize = true;
+            lblFilter.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFilter.Location = new Point(11, 252);
+            lblFilter.Name = "lblFilter";
+            lblFilter.Size = new Size(110, 17);
+            lblFilter.TabIndex = 14;
+            lblFilter.Text = "Filter by Activity";
+            // 
+            // flowLayoutPanelFilters
+            // 
+            flowLayoutPanelFilters.AutoScroll = true;
+            flowLayoutPanelFilters.BorderStyle = BorderStyle.FixedSingle;
+            flowLayoutPanelFilters.Location = new Point(11, 272);
+            flowLayoutPanelFilters.Name = "flowLayoutPanelFilters";
+            flowLayoutPanelFilters.Size = new Size(227, 277);
+            flowLayoutPanelFilters.TabIndex = 13;
             // 
             // ActivityForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(984, 561);
+            Controls.Add(lblFilter);
+            Controls.Add(flowLayoutPanelFilters);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Controls.Add(monthCalendar1);
             Name = "ActivityForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ActivityForm";
@@ -275,6 +291,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -290,7 +307,6 @@
         private Button btnActivity;
         private Panel panel2;
         private Panel panel1;
-        private MonthCalendar monthCalendar1;
         private Label label2;
         private ComboBox cbType;
         private Label label6;
@@ -299,5 +315,7 @@
         private TextBox tbThree;
         private TextBox tbTwo;
         private TextBox tbOne;
+        private Label lblFilter;
+        private FlowLayoutPanel flowLayoutPanelFilters;
     }
 }

@@ -14,7 +14,7 @@ namespace Fitness_Tracker.Controller
 
         public ActivityController(ActivityForm activityForm)
         {
-            _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\DELL\\Documents\\FitnessTracker.mdf;Integrated Security=True;Connect Timeout=30";
+            _connectionString = ConnectionStringProvider.ConnectionString;
             _activityForm = activityForm;
             _activityModel = new ActivityModel();
             _goalModel = new GoalModel();
@@ -55,6 +55,26 @@ namespace Fitness_Tracker.Controller
             try
             {
                 DataTable activities = _activityModel.GetActivitiesByUsername(username);
+                if (activities != null)
+                {
+                    dataGridView.DataSource = activities;
+                }
+                else
+                {
+                    _activityForm.ShowErrorMessage("No Activities found to display.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _activityForm.ShowErrorMessage("Error retrieving Activities: " + ex.Message);
+            }
+        }
+
+        public void DisplayActivitiesByUsernameAndActivity(DataGridView dataGridView, string username, string activityName)
+        {
+            try
+            {
+                DataTable activities = _activityModel.GetActivitiesByUsernameAndType(username, activityName);
                 if (activities != null)
                 {
                     dataGridView.DataSource = activities;

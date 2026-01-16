@@ -33,7 +33,6 @@
             btnGoal = new Button();
             panel1 = new Panel();
             btnLogout = new Button();
-            label1 = new Label();
             panel2 = new Panel();
             panelGoal = new Panel();
             label17 = new Label();
@@ -70,6 +69,7 @@
             btnDelete = new Button();
             btnEdit = new Button();
             panel3 = new Panel();
+            label1 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panelGoal.SuspendLayout();
@@ -112,9 +112,9 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(label1);
             panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(btnProfile);
-            panel1.Controls.Add(label1);
             panel1.Controls.Add(btnActivity);
             panel1.Controls.Add(btnGoal);
             panel1.Location = new Point(12, 12);
@@ -134,16 +134,6 @@
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = false;
             btnLogout.Click += btnLogout_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Arial Rounded MT Bold", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(35, 16);
-            label1.Name = "label1";
-            label1.Size = new Size(154, 37);
-            label1.TabIndex = 3;
-            label1.Text = "Fit Track";
             // 
             // panel2
             // 
@@ -532,6 +522,16 @@
             panel3.Size = new Size(227, 123);
             panel3.TabIndex = 7;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Arial Rounded MT Bold", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(3, 16);
+            label1.Name = "label1";
+            label1.Size = new Size(227, 32);
+            label1.TabIndex = 5;
+            label1.Text = "Fitness Tracker ";
+            // 
             // Profile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -564,7 +564,6 @@
         private Button btnGoal;
         private Panel panel1;
         private Panel panel2;
-        private Label label1;
         private Button btnLogout;
         private MonthCalendar monthCalendar1;
         private TextBox tbWeight;
@@ -601,5 +600,6 @@
         private Label labelStart;
         private Label labelId;
         private Label label12;
+        private Label label1;
     }
 }
